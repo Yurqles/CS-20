@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mario Kart Item Box</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+  <div class="main">
+    <h1>Mario Kart Item Box Simulator</h1>
+
+    <!--  Instructions -->
+    <p>Enter a racer position and then click the item box to simulate collecting an item.</p>
+    <p>Racer Position (1-12): <input id='position' type="number" value='12'></p>
+
+    <!-- Image & Results  -->
+    <img id="mainImg" src="images/itembox.jpg">
+    
+    <h3>Totals</h3>
+    <p>
+      Banana: <span id="banana">0</span> |
+      Green Shell: <span id="green-shell">0</span> |
+      Star: <span id="star">0</span> |
+      Golden Mushroom: <span id="golden-mushroom">0</span> |
+      Bullet Bill: <span id="bullet-bill">0</span>
+    </p>
+    <hr>
+
+    <p id="results"></p>
+  </div>
+
+
+  <!--  LOAD JAVASCRIPT -->
+  <script src="main.js"></script>
+
+</body>
+
+</html>
