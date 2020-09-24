@@ -7,12 +7,12 @@ initGraphics(800, 600)
 
 //Snowflakes
 let snowflakes = []
-for (let n = 0; n < 80; n++) {
+for (let n = 0; n < 200; n++) {
     snowflakes.push({
-        x: Math.randomDec(0, 800),
-        y: Math.randomDec(0, 600),
-        r: Math.randomDec(5, 12),
-        col: 'white',
+        x: Math.randomDec(0, cnv.width),
+        y: Math.randomDec(0, cnv.height),
+        r: Math.randomDec(3, 8),
+        color: 'white',
     });
     
 }
@@ -28,14 +28,17 @@ function draw() {
     for (let i = 0; i < snowflakes.length; i++) {
         //Move Snowflakes
         snowflakes[i].x += Math.randomDec(-2, 2);
-        snowflakes[i].y += Math.randomDec(-5, -1);
+        snowflakes[i].y += Math.randomDec(2, 10);
 
         //Draw Snowflake
-        ctx.strokeStyle = snowflakes[i].col;
-        ctx.fillCircle(snowflakes[i].x, snowflakes[i].y, snowflakes[i].r, 0, Math.PI * 2);
+        ctx.fillStyle = snowflakes[i].color;
+        ctx.fillCircle(snowflakes[i].x, snowflakes[i].y, snowflakes[i].r);
 
+        //Teleport Snowflakes to the top if they fall to the bottom
+        if (snowflakes[i].y + snowflakes[i].r >= 800) {
+            snowflakes[i].y = 0;
+        }
     }
-    
 
     // Request another Animation Frame
     requestAnimationFrame(draw);
@@ -52,11 +55,12 @@ function keyDownHandler(event) {
     }
 }
 
+
 function mouseDownHandler(event) {
     //Add a snowflake if clicked on open space, remove a snowflake if snowflake is clicked
     let remove = false
     for (let i = 0; i < snowflakes.length; i++) {
-        if (ctx.mouseInCircle(snowflakes[i])) {
+        if (snowflakes[i].x  == mouseX + snowflakes.r || snowflakes[i].x  == mouseX - snowflakes.r && snowflakes[i].y  == mouseY + snowflakes.r || snowflakes[i].y  == mouseY - snowflakes.r) {
             snowflakes.splice(i, 1);
             remove = true;
         }
@@ -74,6 +78,3 @@ function mouseDownHandler(event) {
 
 
 }
-
-
-
